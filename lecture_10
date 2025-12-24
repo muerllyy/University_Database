@@ -1,0 +1,73 @@
+--1
+CREATE TABLE projects (
+    project_id SERIAL PRIMARY KEY,
+    name_project VARCHAR(255)
+);
+
+CREATE TABLE members (
+    member_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255)
+);
+
+CREATE TABLE project_team_members (
+    project_team_members_id SERIAL PRIMARY KEY,
+    member_id INT,
+    project_id INT,
+    FOREIGN KEY (member_id) REFERENCES members(member_id),
+    FOREIGN KEY (project_id) REFERENCES projects(project_id),
+    UNIQUE (member_id, project_id)
+);
+
+--2
+
+CREATE TABLE clients (
+    client_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255),
+    email VARCHAR(255)
+);
+
+CREATE TABLE rentals (
+    rental_id SERIAL PRIMARY KEY,
+    rental_name VARCHAR(255)
+);
+
+CREATE TABLE EquipmentRentals (
+    equipment_id SERIAL PRIMARY KEY,
+    rental_date DATE,
+    rental_id INT,
+    client_id INT,
+    FOREIGN KEY (rental_id) REFERENCES rentals(rental_id),
+    FOREIGN KEY (client_id) REFERENCES clients(client_id)
+);
+
+--3
+
+CREATE TABLE courses(
+    course_id SERIAL PRIMARY KEY,
+    course_name VARCHAR(255),
+    professor_name VARCHAR(255)
+);
+
+CREATE TABLE students(
+    student_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255),
+    course_id INT,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+
+CREATE TABLE assignments(
+    assignment_id SERIAL PRIMARY KEY,
+    assignment_name VARCHAR(255)
+);
+
+
+CREATE TABLE assignments_and_grades(
+    assignment_and_grade_id SERIAL PRIMARY KEY,
+    assignment_grade INT,
+    assignment_id INT,
+    student_id INT,
+    FOREIGN KEY (assignment_id) REFERENCES assignments(assignment_id),
+    FOREIGN KEY (student_id) REFERENCES students(student_id)
+
+);
+
