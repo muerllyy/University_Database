@@ -71,7 +71,8 @@ CREATE TABLE booking_time_rooms(
     booking_time_id INT,
     room_id INT,
     FOREIGN KEY (room_id) REFERENCES ROOMS(room_id),
-    FOREIGN KEY (booking_time_id) REFERENCES booking_times(booking_time_id)
+    FOREIGN KEY (booking_time_id) REFERENCES booking_times(booking_time_id),
+    UNIQUE (booking_time_id,room_id)
 );
 
 CREATE TABLE event_type_name(
@@ -79,7 +80,8 @@ CREATE TABLE event_type_name(
     event_type_id INT,
     event_name_id INT,
     FOREIGN KEY (event_type_id) REFERENCES event_types(event_type_id),
-    FOREIGN KEY (event_name_id) REFERENCES event_names(event_name_id)
+    FOREIGN KEY (event_name_id) REFERENCES event_names(event_name_id),
+    UNIQUE (event_type_id, event_name_id)
 );
 
 CREATE TABLE event_type_rooms(
@@ -87,7 +89,8 @@ CREATE TABLE event_type_rooms(
     event_type_id INT,
     room_id INT,
     FOREIGN KEY (event_type_id) REFERENCES event_types(event_type_id),
-    FOREIGN KEY (room_id) REFERENCES rooms(room_id)
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id),
+    UNIQUE (event_type_id,room_id)
 );
 
 
